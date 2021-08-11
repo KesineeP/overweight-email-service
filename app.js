@@ -3,14 +3,17 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-const notifymeRouter = require('./routes/notifyme');
-const testRouter = require('./routes/test');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
 const app = express();
-const port = 3000
+const testRouter = require('./routes/test');
+const notifymeRouter = require('./routes/notifyme')
 
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -18,8 +21,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', testRouter);
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/test', testRouter);
 app.use('/notifyme', notifymeRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -36,8 +43,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-})
 
 module.exports = app;

@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
-
-/* GET home page. */
+router.get('/', (req,res) => {
+  res.send("hi post");
+  // res.sendStatus(200)
+  res.end()
+})
 router.post("/", (req, res) => {
-  const emailTest = req.body.email;
-
-  res.send({ email: emailTest });
-  //res.send("hi post");
+  // console.log("Got body: ", req.body);
+  const {email} = req.body;
+  res.send({ email: email });
 });
 
 module.exports = router;
