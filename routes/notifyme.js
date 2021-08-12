@@ -1,14 +1,13 @@
 const express = require("express");
 const router = express.Router();
-router.get('/', (req,res) => {
-  res.send("hi post");
-  // res.sendStatus(200)
-  res.end()
-})
-router.post("/", (req, res) => {
-  // console.log("Got body: ", req.body);
+
+router.post("/", (req, res, next) => {
   const {email} = req.body;
   res.send({ email: email });
+  // res.redirect('/');
+  // next()
 });
-
+router.get('/', (req,res) => {
+  res.send("We will send you an email when the app is launch");
+})
 module.exports = router;
