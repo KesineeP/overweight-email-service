@@ -4,5 +4,7 @@ block content
   h1= title
   p Welcome to #{title}
   h2 Enter yout email address for noyification
-  input
-  button Notify Me 
+  div
+    form(action='/notifyme',method='post')
+      input(id='email',type='text',value='',placeholder='Your Email Address',name='email') 
+      input(type='submit',value='Notify Me',data-transition='fade', data-theme='c')
