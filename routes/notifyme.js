@@ -3,7 +3,8 @@ const router = express.Router();
 
 router.post("/", (req, res, next) => {
   const {email} = req.body;
-  res.send({ email: email });
+  res.send({ email: process.env.PG_USER });
+
   // res.redirect('/');
   // next()
 });

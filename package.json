@@ -2,14 +2,18 @@
   "name": "overweight-email-service",
   "version": "0.0.0",
   "private": true,
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "env-cmd -f envs/.env.prod node ./bin/www",
+    "local": "env-cmd -f envs/.env.local node ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.4",
-    "cool-ascii-faces": "^1.3.4",
     "debug": "~2.6.9",
+    "dotenv": "^10.0.0",
+    "env-cmd": "^10.1.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
@@ -18,5 +22,16 @@
   },
   "engines": {
     "node": "12.22.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KesineeP/overweight-email-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KesineeP/overweight-email-service/issues"
+  },
+  "homepage": "https://github.com/KesineeP/overweight-email-service#readme"
 }

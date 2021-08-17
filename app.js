@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const cool = require('cool-ascii-faces');
 
+const pool = require('./db')
 const app = express();
 const testRouter = require('./routes/test');
 const notifymeRouter = require('./routes/notifyme')
@@ -18,7 +18,6 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use('/cool', (req, res) => res.send(cool()));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
