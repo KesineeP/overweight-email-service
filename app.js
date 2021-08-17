@@ -10,7 +10,6 @@ const app = express();
 const testRouter = require('./routes/test');
 const notifymeRouter = require('./routes/notifyme')
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
