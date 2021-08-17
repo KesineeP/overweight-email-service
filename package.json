@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "export NODE_ENV=production && node ./bin/www",
+    "start": "env-cmd -f envs/.env.prod node ./bin/www",
     "local": "env-cmd -f envs/.env.local node ./bin/www"
   },
   "dependencies": {
