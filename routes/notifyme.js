@@ -10,13 +10,12 @@ router.post("/", async (req, res) => {
     const emailList = await pool.query(`SELECT email
     FROM "email-service".email_list;`);
     // await pool.end();
-    console.log(addEmail);
-    console.log(emailList.rows);
+    
   }
   catch (err) {
     console.error(err.message);
   }
-  res.sendStatus(200);
+  res.send(emailList.rows);
   
 });
 
