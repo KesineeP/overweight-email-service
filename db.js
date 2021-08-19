@@ -22,7 +22,7 @@ const prodConfig = {
 
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? prodConfig : localConfig);
-console.log('prod', prodConfig);
-console.log('local', localConfig);
-console.log('node env', process.env.NODE_ENV);
+// console.log('prod', prodConfig);
+// console.log('local', localConfig);
+// console.log('node env', process.env.NODE_ENV);
 module.exports = pool;
