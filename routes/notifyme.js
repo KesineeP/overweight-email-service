@@ -1,11 +1,24 @@
 const express = require("express");
-// const {Client} = require('pg')
 const router = express.Router();
 const pool = require('../db')
+const sgMail = require("@sendgrid/mail");
+
+gMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+//TO DO: check if email has been register first
+//if yes then send back "This ${email} has been registerd"
 
 router.post("/", async (req, res) => {
-  try {
-    const {email} = req.body;
+  const {email} = req.body;
+    const msg = {
+      to: `${email}`,
+      from: 'support@overweightfinancials.com',
+      subject: 'Overweight Financials : Register for  notification',
+      text: 'Welcome To Overweight Financials',
+      html: '<h1>Welcome To Overweight Financials</h1>'
+    }
+    try {
+    await sgMail.send(msg).then(res => console.log(`Email sent to.. ${email}`)).catch(error => error.message)
     await pool.query(`INSERT INTO "email-service".email_list (email) VALUES ($1)`, [email])
     
   }
