@@ -3,12 +3,12 @@ const router = express.Router();
 const pool = require('../db')
 const sgMail = require("@sendgrid/mail");
 
-gMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 //TO DO: check if email has been register first
 //if yes then send back "This ${email} has been registerd"
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   const {email} = req.body;
     const msg = {
       to: `${email}`,
