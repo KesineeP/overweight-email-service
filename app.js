@@ -7,7 +7,6 @@ const cors = require("cors");
 const app = express();
 const indexRouter = require("./routes/index");
 const notifymeRouter = require("./routes/notifyme");
-const successRouter = require("./routes/success");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -15,7 +14,7 @@ app.set("view engine", "jade");
 
 app.use(cors());
 app.use(logger("dev"));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
