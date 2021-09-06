@@ -8,6 +8,18 @@ const app = express();
 const indexRouter = require("./routes/index");
 const notifymeRouter = require("./routes/notifyme");
 
+const whiteList = ["https://overweightfinancials.com", "http://localhost:3000"];
+const corsOption = {
+  origin: function (origin, callback) {
+    if (whiteList.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+app.options("*", cors(corsOption));
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
