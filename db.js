@@ -15,8 +15,14 @@ const localConfig = {
 
 const prodConfig = {
     connectionString: process.env.DATABASE_URL, //heroku addons
-    
+    ssl: {
+        rejectUnauthorized: false
+      }
 }
-const pool = new Pool(process.env.NODE.ENV === 'production' ? prodConfig : localConfig);
 
+
+const pool = new Pool(process.env.NODE_ENV === 'production' ? prodConfig : localConfig);
+// console.log('prod', prodConfig);
+// console.log('local', localConfig);
+// console.log('node env', process.env.NODE_ENV);
 module.exports = pool;
