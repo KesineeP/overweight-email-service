@@ -8,7 +8,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 //TO DO: check if email has been register first
 //if yes then send back "This ${email} has been registerd"
 
-router.post("/", (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const { email } = req.body;
   const msg = {
     to: `${email}`,
@@ -18,21 +18,26 @@ router.post("/", (req, res, next) => {
     html: "<h1>Welcome To Overweight Financials</h1>",
   };
   try {
-    pool.query(`INSERT INTO "email-service".email_list (email) VALUES ($1)`, [
-      email,
-    ]);
-
-    // sgMail
-    //   .send(msg)
-    //   .then((res) => console.log(`Email sent to.. ${email}`))
-    //   .catch((error) => error.message);
+    await pool.query(
+      `INSERT INTO "email-service".email_list (email) VALUES ($1)`,
+      [email]
+    );
+    sgMail
+      .send(msg)
+      .then((res) => console.log(`Email sent to.. ${email}`))
+      .catch((error) => error.message);
 
     res.send(
-      `You have been registered for notification with this email address: ${req.body.email}`
+      `Thank you! ${req.body.email} has been registered for notifications`
     );
   } catch (err) {
-    console.log("Error status", err);
-    console.log("Error occurs");
+    if (err.code === "23505") {
+      console.log("Error status", err);
+      res.send(`${req.body.email} is already signed up`);
+    } else {
+      console.log("Error status", err);
+      res.send("Something went wrong! Try again later.");
+    }
   }
 });
 
