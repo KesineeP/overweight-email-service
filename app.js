@@ -8,7 +8,10 @@ const app = express();
 const indexRouter = require("./routes/index");
 const notifymeRouter = require("./routes/notifyme");
 
-const whiteList = ["https://overweightfinancials.com", "http://localhost:3000"];
+const whiteList = [
+  "https://www.overweightfinancials.com",
+  "http://localhost:3000",
+];
 const corsOption = {
   origin: function (origin, callback) {
     if (whiteList.indexOf(origin) !== -1) {
