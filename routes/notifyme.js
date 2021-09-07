@@ -18,18 +18,21 @@ router.post("/", (req, res, next) => {
     html: "<h1>Welcome To Overweight Financials</h1>",
   };
   try {
-    sgMail
-      .send(msg)
-      .then((res) => console.log(`Email sent to.. ${email}`))
-      .catch((error) => error.message);
     pool.query(`INSERT INTO "email-service".email_list (email) VALUES ($1)`, [
       email,
     ]);
+
+    // sgMail
+    //   .send(msg)
+    //   .then((res) => console.log(`Email sent to.. ${email}`))
+    //   .catch((error) => error.message);
+
     res.send(
       `You have been registered for notification with this email address: ${req.body.email}`
     );
   } catch (err) {
-    console.error(err.message);
+    console.log("Error status", err);
+    console.log("Error occurs");
   }
 });
 
