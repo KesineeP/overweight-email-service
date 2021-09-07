@@ -9,7 +9,7 @@ const indexRouter = require("./routes/index");
 const notifymeRouter = require("./routes/notifyme");
 
 const whiteList = [
-  "https://www.overweightfinancials.com/",
+  "https://www.overweightfinancials.com",
   "http://localhost:3000",
 ];
 const corsOption = {
