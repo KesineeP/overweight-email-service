@@ -27,15 +27,15 @@ router.post("/", async (req, res, next) => {
       .then((res) => console.log(`Email sent to.. ${email}`))
       .catch((error) => error.message);
 
-    res.send({
-      message: `Thank you! ${req.body.email} has been registered for notifications`,
+    res.status(200).send({
+      message: `Thank you! ${req.body.email} has been signed up for notifications`,
     });
   } catch (err) {
     if (err.code === "23505") {
-      console.log("Error status", err.toString());
-      res.send({ message: `${req.body.email} is already signed up` });
+      res
+        .status(400)
+        .send({ message: `${req.body.email} is already signed up` });
     } else {
-      console.log("Error", err);
       res.send({ message: "Something went wrong! Try again later." });
     }
   }
