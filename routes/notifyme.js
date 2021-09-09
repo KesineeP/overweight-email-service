@@ -33,7 +33,7 @@ router.post("/", async (req, res, next) => {
   } catch (err) {
     if (err.code === "23505") {
       res
-        .status(400)
+        .status(409)
         .send({ message: `${req.body.email} is already signed up` });
     } else {
       res.send({ message: "Something went wrong! Try again later." });
