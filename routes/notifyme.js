@@ -22,10 +22,10 @@ router.post("/", async (req, res, next) => {
       `INSERT INTO "email-service".email_list (email) VALUES ($1)`,
       [email]
     );
-    sgMail
-      .send(msg)
-      .then((res) => console.log(`Email sent to.. ${email}`))
-      .catch((error) => error.message);
+    // sgMail
+    //   .send(msg)
+    //   .then((res) => console.log(`Email sent to.. ${email}`))
+    //   .catch((error) => error.message);
 
     res.status(200).send({
       message: `Thank you! ${req.body.email} has been signed up for notifications`,
