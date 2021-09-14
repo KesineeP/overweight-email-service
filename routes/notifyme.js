@@ -3,11 +3,6 @@ const router = express.Router();
 const pool = require("../db");
 const sgMail = require("@sendgrid/mail");
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-//TO DO: check if email has been register first
-//if yes then send back "This ${email} has been registerd"
-
 router.post("/", async (req, res, next) => {
   const { email } = req.body;
   const msg = {
@@ -15,7 +10,7 @@ router.post("/", async (req, res, next) => {
     from: "support@overweightfinancials.com",
     subject: "Overweight Financials : Register for  notification",
     text: "Welcome To Overweight Financials",
-    html: "<h1>Welcome To Overweight Financials</h1>",
+    html: "Welcome",
   };
   try {
     await pool.query(
