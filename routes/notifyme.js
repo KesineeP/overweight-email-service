@@ -2,15 +2,14 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.post("/", async (req, res, next) => {
   const { email } = req.body;
   const msg = {
     to: `${email}`,
     from: "support@overweightfinancials.com",
-    subject: "Overweight Financials : Register for  notification",
-    text: "Welcome To Overweight Financials",
-    html: "Welcome",
+    templateId: "d-9c00c9a417a749d29c5ae0ab3d393e54", //Generate template Id from Dynamic Templates on Sendgrid website
   };
   try {
     await pool.query(
