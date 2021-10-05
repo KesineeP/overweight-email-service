@@ -10,6 +10,11 @@ router.post("/", async (req, res, next) => {
     to: `${email}`,
     from: "support@overweightfinancials.com",
     templateId: "d-9c00c9a417a749d29c5ae0ab3d393e54", //Generate template Id from Dynamic Templates on Sendgrid website
+    dynamic_template_data: {
+      user: {
+        email: `${email}`,
+      },
+    },
   };
   try {
     await pool.query(

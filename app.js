@@ -7,6 +7,7 @@ const cors = require("cors");
 const app = express();
 const indexRouter = require("./routes/index");
 const notifymeRouter = require("./routes/notifyme");
+const unsubscribeRouter = require("./routes/unsubscribe");
 
 const whiteList = [
   "https://www.overweightfinancials.com",
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/notifyme", notifymeRouter);
+app.use("/unsubscribe", unsubscribeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
