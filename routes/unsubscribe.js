@@ -3,7 +3,6 @@ const router = express.Router();
 const pool = require("../db");
 
 router.delete("/", async (res, req) => {
-  const { email } = res.body;
   try {
     await pool.query(
       `DELETE
