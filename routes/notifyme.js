@@ -4,7 +4,7 @@ const pool = require("../db");
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-router.post("/", async (req, res, next) => {
+router.post("/", async (req, res) => {
   const { email } = req.body;
   const msg = {
     to: `${email}`,

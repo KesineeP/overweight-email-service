@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-router.delete("/:email", async (res, req, next) => {
-  const { email } = res.params;
+router.delete("/:email", async (req, res) => {
+  const { email } = req.params;
 
   try {
     const unsubscribe = await pool.query(
@@ -12,16 +12,13 @@ router.delete("/:email", async (res, req, next) => {
             WHERE email = '${email}'
       `
     );
-    //if rowCount === 0
-    //send back message say "${email} already unsubscribe"
-    //else send back message say "${email} Successfully Unsubscribe"
     if (unsubscribe.rowCount === 0) {
-      console.log(`${email} Already Unsubscribed`);
+      res.send({ message: `${email} Already Unsubscribed` });
     } else {
-      console.log(`${email} Successfully Unsubscribed`);
+      res.send({ message: `${email} Successfully Unsubscribed` });
     }
   } catch (err) {
-    console.log(err);
+    res.send({ message: "Something Went Wrong!" });
   }
 });
 
