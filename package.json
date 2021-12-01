@@ -35,5 +35,9 @@
   "bugs": {
     "url": "https://github.com/KesineeP/overweight-email-service/issues"
   },
-  "homepage": "https://github.com/KesineeP/overweight-email-service#readme"
+  "homepage": "https://github.com/KesineeP/overweight-email-service#readme",
+  "devDependencies": {
+    "jest": "^27.4.3",
+    "supertest": "^6.1.6"
+  }
 }
