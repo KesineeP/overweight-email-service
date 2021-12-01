@@ -1,26 +1,36 @@
 const express = require("express");
-// const {Client} = require('pg')
 const router = express.Router();
-const pool = require('../db')
+const pool = require("../db");
+const sgMail = require("@sendgrid/mail");
 
-router.post("/", async (req, res) => {
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+//TO DO: check if email has been register first
+//if yes then send back "This ${email} has been registerd"
+
+router.post("/", (req, res, next) => {
+  const { email } = req.body;
+  const msg = {
+    to: `${email}`,
+    from: "support@overweightfinancials.com",
+    subject: "Overweight Financials : Register for  notification",
+    text: "Welcome To Overweight Financials",
+    html: "<h1>Welcome To Overweight Financials</h1>",
+  };
   try {
-    const {email} = req.body;
-    const addEmail = await pool.query(`INSERT INTO "email-service".email_list (email) VALUES ($1)`, [email])
-    const emailList = await pool.query(`SELECT email
-    FROM "email-service".email_list;`);
-    // await pool.end();
-    console.log(addEmail);
-    console.log(emailList.rows);
-  }
-  catch (err) {
+    sgMail
+      .send(msg)
+      .then((res) => console.log(`Email sent to.. ${email}`))
+      .catch((error) => error.message);
+    pool.query(`INSERT INTO "email-service".email_list (email) VALUES ($1)`, [
+      email,
+    ]);
+  } catch (err) {
     console.error(err.message);
   }
-  res.sendStatus(200);
-  
+  res.send(
+    `You have been registered for notification with this email address: ${req.body.email}`
+  );
 });
 
-router.get('/', (req,res) => {
-  res.send("We will send you an email when the app is launch");
-})
 module.exports = router;
