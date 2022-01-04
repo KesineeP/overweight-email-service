@@ -1,17 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const pool = require("../db");
+const databaseService = require("../service/databaseService");
 
 router.delete("/:email", async (req, res) => {
   const { email } = req.params;
-
+  console.log(email);
   try {
-    const unsubscribe = await pool.query(
-      `DELETE
-            FROM "email-service".email_list
-            WHERE email = '${email}'
-      `
+    const unsubscribe = await databaseService.deleteUserEmailFromEmailList(
+      email
     );
+    console.log(unsubscribe.rowCount);
     if (unsubscribe.rowCount === 1) {
       res.send({ message: `${email} Successfully Unsubscribed` });
     } else {

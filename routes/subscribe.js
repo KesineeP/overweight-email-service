@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const sendWelcomeEmail = require("../service/sendGridService");
-const addUserEmailToEmailList = require("../service/databaseService");
+const databaseService = require("../service/databaseService");
 router.post("/", async (req, res) => {
   const { email } = req.body;
+  const welcomeEmailTemplateId = "d-9c00c9a417a749d29c5ae0ab3d393e54";
+
   try {
-    await addUserEmailToEmailList(email);
-    sendWelcomeEmail(req, res); //send welcome email to user
+    await databaseService.addUserEmailToEmailList(email);
+    sendWelcomeEmail(email, welcomeEmailTemplateId);
     res.status(200).send({
       message: `Thank you! ${req.body.email} has been signed up for notifications`,
     });

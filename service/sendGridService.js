@@ -1,11 +1,11 @@
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-module.exports = function sendWelcomeEmail(email, welcomeTemplateId) {
+module.exports = function sendWelcomeEmail(email, welcomeEmailTemplateId) {
   const msg = {
     to: email,
     from: "support@overweightfinancials.com",
-    templateId: welcomeTemplateId,
+    templateId: welcomeEmailTemplateId,
     dynamic_template_data: {
       user: {
         email: email,
