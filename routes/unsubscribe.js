@@ -4,7 +4,6 @@ const databaseService = require("../service/databaseService");
 
 router.delete("/:email", async (req, res) => {
   const { email } = req.params;
-  console.log(email);
   try {
     const unsubscribe = await databaseService.deleteUserEmailFromEmailList(
       email

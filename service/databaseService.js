@@ -11,7 +11,7 @@ exports.deleteUserEmailFromEmailList = (email) => {
   return pool.query(
     `DELETE
             FROM "email-service".email_list
-            WHERE email = '${email}'
-        `
+            WHERE "email" = ($1)`,
+    [email]
   );
 };
