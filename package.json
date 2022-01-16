@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "start": "env-cmd -f envs/.env.prod node ./bin/www",
-    "local": "env-cmd -f envs/.env.local node ./bin/www"
+    "local": "env-cmd -f envs/.env.local node ./bin/www",
+    "test": "jest",
+    "testwatch": "jest --watchAll"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.6",

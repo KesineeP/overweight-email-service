@@ -6,7 +6,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const app = express();
 const indexRouter = require("./routes/index");
-const notifymeRouter = require("./routes/notifyme");
+const subscribeRouter = require("./routes/subscribe");
 const unsubscribeRouter = require("./routes/unsubscribe");
 
 const whiteList = [
@@ -36,7 +36,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/notifyme", notifymeRouter);
+app.use("/subscribe", subscribeRouter);
 app.use("/unsubscribe", unsubscribeRouter);
 
 // catch 404 and forward to error handler
